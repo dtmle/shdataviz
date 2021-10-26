@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'readings' })
 export class Reading {
@@ -8,7 +8,7 @@ export class Reading {
     @Column({ type: 'timestamp without time zone' })
     DateTime: Date;
 
-    @Column({ type: 'text' })
+    @PrimaryColumn({ type: 'text' })
     Device_ID: string;
 
     @Column({ type: 'text' })

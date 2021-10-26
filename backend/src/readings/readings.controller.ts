@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ReadingsService } from './readings.service';
 
 @Controller('readings')
@@ -6,7 +6,8 @@ export class ReadingsController {
     constructor(private readonly readingsService: ReadingsService) {}
 
     @Get()
-    findAll() {
+    findAll(@Query() start: string, end: string) {
+        console.log(start);
         return this.readingsService.findAll();
     }
 
