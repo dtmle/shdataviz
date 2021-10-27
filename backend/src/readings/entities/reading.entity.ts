@@ -5,7 +5,7 @@ export class Reading {
     @PrimaryColumn({ type: 'text' })
     Serial_Number: string;
 
-    @Column({ type: 'timestamp without time zone' })
+    @PrimaryColumn({ type: 'timestamp without time zone' })
     DateTime: Date;
 
     @PrimaryColumn({ type: 'text' })
