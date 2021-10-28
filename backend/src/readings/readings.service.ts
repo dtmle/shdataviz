@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import ReadingQueries from 'src/types/ReadingQueries';
-import { Between, Repository } from 'typeorm';
+import { Any, Between, Repository } from 'typeorm';
 import { Reading } from './entities/reading.entity';
 import * as moment from 'moment';
 
@@ -24,6 +24,10 @@ export class ReadingsService {
                     moment(value).startOf('day'),
                     moment(value).endOf('day')
                 );
+            }
+            if (query === 'devices') {
+                const ids = value.split(',');
+                where['Device_ID'] = Any(ids);
             } else {
                 console.log(query, value);
                 where[query] = value;
@@ -57,6 +61,7 @@ export class ReadingsService {
                     id: serial_number,
                 })
                 .distinct(true)
+                .orderBy('Device_ID', 'ASC')
                 .getRawMany();
             deviceMap[serial_number] = {
                 devices: devices.map((item) => item.device_id),
@@ -71,6 +76,7 @@ export class ReadingsService {
             .createQueryBuilder('readings')
             .select('readings.Serial_Number AS Serial_Number')
             .distinct(true)
+            .orderBy('Serial_Number', 'ASC')
             .getRawMany();
     }
 }

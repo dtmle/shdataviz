@@ -14,6 +14,7 @@ export class ReadingsController {
     @Get()
     // todo: validate query parameters...
     findAll(@Query() queries?: ReadingQueries) {
+        console.log(queries);
         return this.readingsService.findAll(queries);
     }
 

@@ -1,3 +1,3 @@
 export type Devices = {
-    [key: string]: { devices: Array<string> };
+    [serialNumber: string]: { devices: Array<string> };
 };
